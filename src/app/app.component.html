@@ -1,0 +1,18 @@
+<app-header></app-header>
+<!--Se pueden poner los componentes de las dos formas,tantp como esta header o como esta user, 
+    en caso de que no tengan nada entre sus etiquetas-->
+<main> <!--Este main se pone para envolver lo referente al usuario y poder mejorar el aspecto-->
+    <ul id="users">
+        @for (user of users; track user.id){  <!--Con ese track lo que hacemos es darle un elemento unico de seguimiento a Angular-->
+            <li> <!--Esto sirve para agregar un elemento a la lista-->
+                <app-user [user]="user" [selected]="user.id === selectedUserId" (select)="onSelectUser($event)" />
+            </li>
+       } 
+    </ul> <!--Esto agrega una lista-->
+
+    @if (selectedUser){
+        <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name"/> <!--Acá estamos haciendo una condicion-->
+    } @else {
+            <p id="fallback">Select a user to see their tasks!</p>
+    }
+</main>
